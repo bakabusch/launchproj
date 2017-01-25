@@ -1,0 +1,83 @@
+{% extends "baseball/base.html" %}
+
+
+    {% block content %}
+
+
+<div class="col-sm-12">
+    <img src="{{ batter.image.url }}" class="img-responsive" />
+<h2>{{ batter.player }}  <small>{{ batter.team }}</small></h2>
+        <h4>{{ batter.pos }}</h4>
+
+
+        <ul>
+
+                <table style="width:100%">
+                    <tr>
+                        <th>Year</th>
+                        <th>G</th>
+                        <th>AB</th>
+                        <th>PA</th>
+                        <th>H</th>
+                        <th>1B</th>
+                        <th>2B</th>
+                        <th>3B</th>
+                        <th>HR</th>
+                        <th>R</th>
+                        <th>RBI</th>
+                        <th>BB</th>
+                        <th>IBB</th>
+                        <th>SO</th>
+                        <th>HBP</th>
+                        <th>SF</th>
+                        <th>SH</th>
+                        <th>GDP</th>
+                        <th>SB</th>
+                        <th>CS</th>
+                        <th>AVG</th>
+                    </tr>
+                    {% for statline in batter.statline_set.all %}
+
+                    <tr>
+                        <td>{{ statline.year }}</td>
+                        <td>{{ statline.g }}</td>
+                        <td>{{ statline.ab }}</td>
+                        <td>{{ statline.pa }}</td>
+                        <td>{{ statline.h }}</td>
+                        <td>{{ statline.single }}</td>
+                        <td>{{ statline.two }}</td>
+                        <td>{{ statline.three }}</td>
+                        <td>{{ statline.hr }}</td>
+                        <td>{{ statline.runs }}</td>
+                        <td>{{ statline.rbi }}</td>
+                        <td>{{ statline.bb }}</td>
+                        <td>{{ statline.ibb }}</td>
+                        <td>{{ statline.so }}</td>
+                        <td>{{ statline.hbp }}</td>
+                        <td>{{ statline.sf }}</td>
+                        <td>{{ statline.sh }}</td>
+                        <td>{{ statline.gdp }}</td>
+                        <td>{{ statline.sb }}</td>
+                        <td>{{ statline.cs }}</td>
+                        <td>{{ statline.ba }}</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </table>
+        <h3>{{ batter.blurb  }}</h3>
+
+
+        </ul>
+        <p>
+            <a href="{% url 'baseball:new_statline' batter.id %}">add new statline</a>
+            <br>
+            <a href="{% url 'baseball:edit_batter' batter.id %}">Edit Player</a>
+
+        </p>
+</div>
+
+    {% endblock content %}
+
+

@@ -1,0 +1,68 @@
+{%load staticfiles %}
+<!--DOCTYPE html -->
+<html>
+
+<head>
+	<title>{% block head_title %}Baseball Stats and More{% endblock head_title %}</title>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href='{% static "css/base.css" %}'/>
+	<style>
+	{% block style %}{% endblock style %}
+	</style>
+</head>
+<body>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+
+<nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mynav">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url 'baseball:index' %}">Home</a>
+        </div>
+             <div class="collapse navbar-collapse" id="mynav">
+                <ul class="nav navbar-nav">
+                    {% if user.is_authenticated %}
+                    <li><a>Hello, {{ user.username }}</a></li>
+                    <li><a href="{% url 'users:logout' %}">Logout</a></li>
+                    {% else %}
+                    <li><a href="{% url 'users:register' %}">Register</a></li>
+                    <li><a href="{% url 'users:login' %}">Login</a></li>
+                    {% endif %}
+                    <li><a href="{% url 'baseball:new_batter' %}">New Batter</a></li>
+                    <li><a href="{% url 'baseball:my_team' %}">My Team</a></li>
+                    <li><a href="https://www.facebook.com/profile.php?id=100001468494842">FaceBook</a></li>
+                    <li><a href="http://mlb.mlb.com/mlb/players/?tcid=nav_mlb_players">MLB</a></li>
+                    <li><a href="http://www.fangraphs.com/projections.aspx?pos=all&stats=bat&type=steamer&team=0&lg=all&players=0">Fangraphs</a></li>
+                    <li><a href="http://www.espn.com/mlb/">ESPN Baseball</a></li>
+                    <li><a href="http://launchcode.org">LaunchCode</a></li>
+
+
+                </ul>
+             </div>
+        </div>
+    </nav>
+
+	<div class="container">
+	{% block content %}
+	{% endblock content %}
+	</div>
+{
+
+</body>
+
+
+</html>
+

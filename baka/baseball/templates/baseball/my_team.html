@@ -1,0 +1,65 @@
+
+{% extends "baseball/base.html" %}
+
+{% block style %}
+
+{% endblock style %}
+{% block content %}
+
+
+	<div class='col-sm-10 col-sm-offset-1'>
+
+		{% load static %}
+		<img src="{% static 'baseball/home.jpg' %}" class="img-responsive"/>
+		<br>
+		<h1>My Team</h1>
+			<form method='GET' action=''>
+				<span class="glyphicon glyphicon-search" aria-hidden="true"></span> <input type='text' name='q' placeholder='Search players' value='{{ request.GET.q }}'/>
+				<input type='submit' value='Search' />
+			</form>
+	<div class="row">
+
+	{% for batter in all_batters %}
+
+	{% if batter.my_team == True %}
+	  <div class="col-sm-6">
+
+	    <div class="thumbnail">
+			{% if batter.image  %}
+			<img src="{{ batter.image.url }}" class="img-responsive" />
+			{% endif %}
+	     <!-- <img src="..." alt="..."> -->
+	      <div class="caption">
+              <h3>{{ batter.rank}} {{batter.player}}<small> {{batter.team}} </small></h3>
+	        <a href="{% url 'baseball:detail' batter.id %}" class="btn btn-primary" role="button">View</a> <h4>{{batter.pos}}</h4>
+
+	      </div>
+	    </div>
+	  </div>
+
+	{% cycle "" "</div><div class='row'>" %}
+	{% endif %}
+	{% endfor %}
+	</div>
+
+
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if all_batters.has_previous %}
+                    <a href="?{{ page_request_var }}={{ all_batters.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ all_batters.number }} of {{ all_batters.paginator.num_pages }}.
+                </span>
+
+                {% if all_batters.has_next %}
+                    <a href="?{{ page_request_var }}={{ all_batters.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">next</a>
+                {% endif %}
+            </span>
+        </div>
+
+	</div>
+{% endblock content %}
+

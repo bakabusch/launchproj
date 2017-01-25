@@ -1,0 +1,15 @@
+{% extends "baseball/base.html" %}
+{% load crispy_forms_tags %}
+    {% block content %}
+
+    <p><a href="{% url 'baseball:detail' batter.id %}" >{{ batter }}</a></p>
+        <p>Edit Statline</p>
+
+        <form action="{% url 'baseball:edit_statline' batter.id %}" method='post'>
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button name="submit">add stats</button>
+
+        </form>
+
+    {% endblock content %}

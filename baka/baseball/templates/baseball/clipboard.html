@@ -1,0 +1,35 @@
+
+
+<p>
+    <a href="{% url 'baseball:index' %}">Home</a>
+    {% if user.is_authenticated %}
+        Hello, {{ user.username }}
+        <a href="{% url 'users:logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'users:register' %}">Register</a>
+        <a href="{% url 'users:login' %}">Login</a>
+    {% endif %}
+</p>
+
+
+from new_statline.html:
+ <p><a href="{% url 'baseball:detail' batter.id %}" >{{ batter }}</a></p>
+
+
+Crispy forms in Settings
+from detail
+        <form action="{% url 'baseball:team' batter.id %}" method='post'>
+                    {% csrf_token %}
+                    {{ form|crispy }}
+        </form>
+
+
+
+with open('projections.csv') as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        print(row['Name'], row['Team'], row['G'], row['AB'], row['PA'], row['H'], row['D'], row['T'],
+              row['HR'], row['R'], row['RBI'], row['BB'], row['SO'], row['HBP'],
+              row['SB'], row['CS'], row['AVG'], row['OBP'], row['SLG'], row['OPS'], row['wOBA'], row['wRC'],
+              row['BsR'], row['Fld'], row['Off'], row['Def'], row['WAR'], row['playerid'],
+        )
